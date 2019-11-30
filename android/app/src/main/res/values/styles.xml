@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/text</item>
+        <item name="android:statusBarColor">@color/statusBarBackground</item>
+        <item name="android:windowLightStatusBar">@bool/statusBarTextDark</item>
+    </style>
+
+    <!-- BootTheme should inherit from AppTheme -->
+    <style name="BootTheme" parent="AppTheme">
+        <!-- set bootsplash.xml as activity background -->
+        <item name="android:background">@drawable/bootsplash</item>
+        <item name="android:statusBarColor">@color/statusBarBackground</item>
+        <item name="android:windowLightStatusBar">@bool/statusBarTextDark</item>
+    </style>
+
+</resources>

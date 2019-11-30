@@ -1,0 +1,145 @@
+{
+  "extends": [
+    "@react-native-community",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/all",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "simple-import-sort",
+    "import"
+  ],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/await-thenable": 2,
+    "@typescript-eslint/brace-style": [2, "stroustrup"],
+    "@typescript-eslint/explicit-function-return-type": [
+      2,
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      2,
+      {
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      2,
+      {
+        "classes": true,
+        "functions": true,
+        "variables": false
+      }
+    ],
+    "@typescript-eslint/promise-function-async": 2,
+    "@typescript-eslint/require-await": 2,
+    "@typescript-eslint/return-await": 2,
+    "brace-style": 0,
+    "camelcase": 2,
+    "comma-spacing": [
+      2,
+      {
+        "after": true,
+        "before": false
+      }
+    ],
+    "complexity": [2, 4],
+    "consistent-return": 2,
+    "func-style": [
+      2,
+      "declaration",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    "import/first": 2,
+    "import/newline-after-import": 2,
+    "import/no-duplicates": 2,
+    "import/order": 0,
+    "jsx-quotes": [1, "prefer-single"],
+    "linebreak-style": [2, "unix"],
+    "new-cap": 2,
+    "no-else-return": 2,
+    "no-extra-parens": 2,
+    "no-lonely-if": 2,
+    "no-loop-func": 2,
+    "no-multi-spaces": 2,
+    "no-underscore-dangle": 2,
+    "no-unexpected-multiline": 2,
+    "no-var": 2,
+    "object-shorthand": [2, "always"],
+    "prefer-arrow-callback": 2,
+    "prefer-const": 2,
+    "prefer-numeric-literals": 2,
+    "prefer-rest-params": 2,
+    "prefer-spread": 2,
+    "prettier/prettier": 2,
+    "react-native/no-color-literals": 1,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react/forbid-component-props": 0,
+    "react/jsx-boolean-value": 2,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-no-literals": 0,
+    "react/jsx-sort-props": [
+      2,
+      {
+        "callbacksLast": true,
+        "reservedFirst": true,
+        "shorthandFirst": true
+      }
+    ],
+    "react/no-multi-comp": 2,
+    "require-await": "off",
+    "simple-import-sort/sort": [
+      2,
+      {
+        "groups": [
+          ["^\\u0000"],
+          [
+            "^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)"
+          ],
+          ["^react$", "^react-native$"],
+          ["^react", "^@?\\w"],
+          ["^(@|@company|@ui|components|utils|config|vendored-lib)(/.*|$)"],
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
+    "sort-imports": 0,
+    "space-in-parens": 2
+  },
+  "settings": {
+    "import/extensions": [".ts", ".tsx", ".json"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "babel-module": {}
+    },
+    "react-native/style-sheet-object-names": ["EStyleSheet"]
+  }
+}
