@@ -1,3 +1,3 @@
 <resources>
-    <bool name="statusBarTextDark">false</bool>
+    <bool name="statusBarTextDark">true</bool>
 </resources>

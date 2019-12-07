@@ -2,39 +2,47 @@ import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import BootSplash from 'react-native-bootsplash';
+import { SharedElement } from 'react-navigation-shared-element';
 
 import { DefaultNavigationProps } from '!/types';
 
-type Props = {
-  navigation: DefaultNavigationProps<'Boot'>;
-};
+type Params = {};
 
-const Boot = ({ navigation }: Props): JSX.Element => {
+type ScreenProps = {};
+
+const Boot: DefaultNavigationProps<Params, ScreenProps> = ({ navigation }) => {
   const [isImageReady, setIsImageReady] = useState(false);
 
-  const handleLoadEnd = (): void => setIsImageReady(true);
+  // Image is done loading
+  const handleLoadEnd = () => setIsImageReady(true);
 
   useEffect(() => {
     if (isImageReady) {
       BootSplash.hide();
+
+      // Load what you need here and them navigate to Home
       setTimeout(() => {
-        navigation.replace('Home', undefined);
+        requestAnimationFrame(() => {
+          navigation.replace('Home');
+        });
       }, 3000);
     }
   }, [isImageReady, navigation]);
 
   return (
     <View style={styles.container}>
-      <Image
-        fadeDuration={0}
-        source={require('../assets/react_logo.png')}
-        onLoadEnd={handleLoadEnd}
-      />
+      <SharedElement id='logo'>
+        <Image
+          fadeDuration={0}
+          source={require('../assets/logo/ic_launcher.png')}
+          onLoadEnd={handleLoadEnd}
+        />
+      </SharedElement>
     </View>
   );
 };
 
-const bgColor = '#04B6B8';
+const bgColor = '#fff';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,5 +52,13 @@ const styles = StyleSheet.create({
     backgroundColor: bgColor,
   },
 });
+
+Boot.navigationOptions = {
+  header: null,
+};
+
+Boot.sharedElements = () => {
+  return [{ id: 'logo' }];
+};
 
 export default Boot;

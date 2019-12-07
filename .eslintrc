@@ -23,14 +23,8 @@
   "root": true,
   "rules": {
     "@typescript-eslint/await-thenable": 2,
-    "@typescript-eslint/brace-style": [2, "stroustrup"],
-    "@typescript-eslint/explicit-function-return-type": [
-      2,
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true
-      }
-    ],
+    "@typescript-eslint/brace-style": [2, "1tbs"],
+    "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-unused-vars": [
       2,
       {
@@ -58,7 +52,7 @@
         "before": false
       }
     ],
-    "complexity": [2, 4],
+    "complexity": [2, 5],
     "consistent-return": 2,
     "func-style": [
       2,
@@ -75,7 +69,14 @@
     "linebreak-style": [2, "unix"],
     "new-cap": 2,
     "no-else-return": 2,
-    "no-extra-parens": 2,
+    "no-extra-parens": [
+      2,
+      "all",
+      {
+        "enforceForArrowConditionals": false,
+        "ignoreJSX": "all"
+      }
+    ],
     "no-lonely-if": 2,
     "no-loop-func": 2,
     "no-multi-spaces": 2,
@@ -93,12 +94,26 @@
     "react-native/no-inline-styles": 2,
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
+    "react/destructuring-assignment": [
+      2,
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+    "react/display-name": 0,
     "react/forbid-component-props": 0,
     "react/jsx-boolean-value": 2,
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-max-depth": [
+      2,
+      {
+        "max": 4
       }
     ],
     "react/jsx-no-literals": 0,
@@ -110,7 +125,13 @@
         "shorthandFirst": true
       }
     ],
-    "react/no-multi-comp": 2,
+    "react/no-multi-comp": [
+      2,
+      {
+        "ignoreStateless": true
+      }
+    ],
+    "react/prop-types": 0,
     "require-await": "off",
     "simple-import-sort/sort": [
       2,
@@ -135,6 +156,7 @@
   },
   "settings": {
     "import/extensions": [".ts", ".tsx", ".json"],
+    "import/ignore": ["react-navigation"],
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },

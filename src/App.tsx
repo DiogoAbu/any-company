@@ -2,34 +2,23 @@ import 'react-native-gesture-handler';
 
 import React from 'react';
 
+import { Provider as PaperProvider } from 'react-native-paper';
 import { useScreens } from 'react-native-screens';
-import { NavigationNativeContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import Boot from '!/screens/Boot';
-import Home from '!/screens/Home';
-import { ParamList, RouteName } from '!/types';
+import { setRootNavigator } from '!/helpers/navigation';
+import AppContainer from '!/navigators/Root';
 
 useScreens();
 
-const Stack = createStackNavigator<ParamList>();
+const App: React.FC = () => {
+  const setRef = (ref) => {
+    setRootNavigator(ref);
+  };
 
-const App = (): JSX.Element => {
   return (
-    <NavigationNativeContainer>
-      <Stack.Navigator initialRouteName='Boot'>
-        <Stack.Screen
-          component={Boot}
-          name={RouteName.Boot}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          component={Home}
-          name={RouteName.Home}
-          options={{ title: 'Home' }}
-        />
-      </Stack.Navigator>
-    </NavigationNativeContainer>
+    <PaperProvider>
+      <AppContainer ref={setRef} />
+    </PaperProvider>
   );
 };
 

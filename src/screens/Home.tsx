@@ -1,29 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+
+import { SharedElement } from 'react-navigation-shared-element';
 
 import { DefaultNavigationProps } from '!/types';
 
-type Props = {
-  navigation: DefaultNavigationProps<'Home'>;
-};
+type Params = {};
 
-const Home = (_props: Props): JSX.Element => {
+type ScreenProps = {};
+
+const Home: DefaultNavigationProps<Params, ScreenProps> = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello</Text>
+      <SharedElement id='logo'>
+        <Image
+          fadeDuration={0}
+          source={require('../assets/logo/ic_launcher.png')}
+        />
+      </SharedElement>
     </View>
   );
 };
 
+const bgColor = '#fff';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
+    backgroundColor: bgColor,
+    padding: 24,
   },
 });
+
+Home.navigationOptions = {
+  title: 'Home',
+};
 
 export default Home;
