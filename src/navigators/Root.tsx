@@ -15,9 +15,6 @@ const Navigator = createMaterialBottomTabNavigator(
   },
   {
     initialRouteName: 'HomeStack',
-    activeColor: '#000',
-    inactiveColor: '#666',
-    barStyle: { backgroundColor: '#fff' },
   },
 );
 

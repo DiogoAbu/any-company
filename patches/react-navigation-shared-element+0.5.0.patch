@@ -1,0 +1,9 @@
+diff --git a/node_modules/react-navigation-shared-element/lib/typescript/createSharedElementStackNavigator.d.ts b/node_modules/react-navigation-shared-element/lib/typescript/createSharedElementStackNavigator.d.ts
+index 4f8bfbb..c9d8f2a 100644
+--- a/node_modules/react-navigation-shared-element/lib/typescript/createSharedElementStackNavigator.d.ts
++++ b/node_modules/react-navigation-shared-element/lib/typescript/createSharedElementStackNavigator.d.ts
+@@ -1,3 +1,3 @@
+ import * as React from 'react';
+-declare function createSharedElementStackNavigator(createNavigator: any, RouteConfigs: any, NavigatorConfig: any): React.ComponentType<any>;
++declare function createSharedElementStackNavigator<R, N, T = {}>(createNavigator: any, RouteConfigs: R, NavigatorConfig: N): React.ComponentType<T>;
+ export default createSharedElementStackNavigator;

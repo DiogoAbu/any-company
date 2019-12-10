@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = {
   color?: string;
-  name?: string;
+  name: string;
   focused?: boolean;
   horizontal?: boolean;
 };
 
-const TabBarIcon = ({ color, name }: Props) => {
+const TabBarIcon: FC<Props> = ({ color, name }) => {
   return <Icon color={color} name={name} size={24} />;
 };
 

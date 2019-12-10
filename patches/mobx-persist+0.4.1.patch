@@ -1,0 +1,48 @@
+diff --git a/node_modules/mobx-persist/lib/index.d.ts b/node_modules/mobx-persist/lib/index.d.ts
+index 730c47a..d1476bf 100644
+--- a/node_modules/mobx-persist/lib/index.d.ts
++++ b/node_modules/mobx-persist/lib/index.d.ts
+@@ -5,9 +5,11 @@ export declare function persist(schema: Object): <T>(target: T) => T;
+ export interface optionsType {
+     storage?: any;
+     jsonify?: boolean;
++    parse?: (data: string) => any;
++    stringify?: (data: any) => string;
+     debounce?: number;
+ }
+ export interface IHydrateResult<T> extends Promise<T> {
+     rehydrate: () => IHydrateResult<T>;
+ }
+-export declare function create({storage, jsonify, debounce}?: any): <T extends Object>(key: string, store: T, initialState?: any) => IHydrateResult<T>;
++export declare function create({storage, jsonify, debounce, parse, stringify}?: optionsType): <T extends Object>(key: string, store: T, initialState?: any) => IHydrateResult<T>;
+diff --git a/node_modules/mobx-persist/lib/index.js b/node_modules/mobx-persist/lib/index.js
+index 11c54da..d2fb5e1 100644
+--- a/node_modules/mobx-persist/lib/index.js
++++ b/node_modules/mobx-persist/lib/index.js
+@@ -24,7 +24,7 @@ function persist() {
+ }
+ exports.persist = persist;
+ function create(_a) {
+-    var _b = _a === void 0 ? {} : _a, _c = _b.storage, storage = _c === void 0 ? Storage : _c, _d = _b.jsonify, jsonify = _d === void 0 ? true : _d, _e = _b.debounce, debounce = _e === void 0 ? 0 : _e;
++    var _b = _a === void 0 ? {} : _a, _c = _b.storage, storage = _c === void 0 ? Storage : _c, _d = _b.jsonify, jsonify = _d === void 0 ? true : _d, _e = _b.debounce, debounce = _e === void 0 ? 0 : _e, _f = _b.parse, parse = _f === void 0 ? 0 : _f, _g = _b.stringify, stringify = _g === void 0 ? 0 : _g;
+     if (typeof localStorage !== 'undefined' && localStorage === storage)
+         storage = Storage;
+     return function hydrate(key, store, initialState) {
+@@ -32,7 +32,7 @@ function create(_a) {
+         var schema = serializr_1.getDefaultModelSchema(store);
+         function hydration() {
+             var promise = storage.getItem(key)
+-                .then(function (d) { return !jsonify ? d : JSON.parse(d); })
++                .then(function (d) { return !jsonify ? d : !!parse ? parse(d) : JSON.parse(d); })
+                 .then(mobx_1.action("[mobx-persist " + key + "] LOAD_DATA", function (persisted) {
+                 if (persisted && typeof persisted === 'object') {
+                     serializr_1.update(schema, store, persisted);
+@@ -44,7 +44,7 @@ function create(_a) {
+             return promise;
+         }
+         var result = hydration();
+-        mobx_1.reaction(function () { return serializr_1.serialize(schema, store); }, function (data) { return storage.setItem(key, !jsonify ? data : JSON.stringify(data)); }, {
++        mobx_1.reaction(function () { return serializr_1.serialize(schema, store); }, function (data) { return storage.setItem(key, !jsonify ? data : !!stringify ? stringify(data) : JSON.stringify(data)); }, {
+             delay: debounce
+         });
+         return result;

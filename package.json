@@ -12,7 +12,13 @@
     "generate-icons": "npx app-icon generate -i ./src/assets/logo/icon.png --background-icon ./src/assets/logo/icon.background.png --foreground-icon ./src/assets/logo/icon.foreground.png --adaptive-icons"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/masked-view": "^0.1.5",
+    "@react-native-community/netinfo": "^5.0.0",
+    "axios": "^0.19.0",
+    "mobx": "^5.15.0",
+    "mobx-persist": "^0.4.1",
+    "mobx-react-lite": "^2.0.0-alpha.4",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-bootsplash": "^1.0.3",
@@ -31,10 +37,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "@types/jest": "^24.0.18",
     "@types/react-native": "^0.60.22",
+    "@types/react-native-vector-icons": "^6.4.4",
     "@types/react-test-renderer": "16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "babel-jest": "^24.9.0",
@@ -67,6 +76,56 @@
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
       "git add"
+    ]
+  },
+  "babel": {
+    "env": {
+      "production": {
+        "plugins": [
+          "react-native-paper/babel",
+          "transform-remove-console"
+        ]
+      }
+    },
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "!": "./src"
+          },
+          "cwd": "babelrc",
+          "extensions": [
+            ".ts",
+            ".tsx",
+            ".js",
+            ".jsx",
+            ".json",
+            ".ios.ts",
+            ".ios.tsx",
+            ".android.ts",
+            ".android.tsx"
+          ],
+          "root": [
+            "./src"
+          ]
+        }
+      ],
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ],
+    "presets": [
+      "module:metro-react-native-babel-preset"
     ]
   }
 }

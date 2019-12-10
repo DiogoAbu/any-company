@@ -4,6 +4,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import { SharedElement } from 'react-navigation-shared-element';
 
+import useStores from '!/hooks/use-stores';
 import { DefaultNavigationProps } from '!/types';
 
 type Params = {};
@@ -11,23 +12,36 @@ type Params = {};
 type ScreenProps = {};
 
 const Boot: DefaultNavigationProps<Params, ScreenProps> = ({ navigation }) => {
+  const [isReady, setIsReady] = useState(false);
   const [isImageReady, setIsImageReady] = useState(false);
 
+  const stores = useStores();
+
+  // Hydrate stores
+  useEffect(() => {
+    (async () => {
+      await stores.hydrate();
+      setIsReady(true);
+    })();
+  }, [stores]);
+
   // Image is done loading
-  const handleLoadEnd = () => setIsImageReady(true);
+  const handleImageLoadEnd = () => {
+    setIsImageReady(true);
+  };
 
   useEffect(() => {
     if (isImageReady) {
       BootSplash.hide();
 
       // Load what you need here and them navigate to Home
-      setTimeout(() => {
+      if (isReady) {
         requestAnimationFrame(() => {
           navigation.replace('Home');
         });
-      }, 3000);
+      }
     }
-  }, [isImageReady, navigation]);
+  }, [isImageReady, isReady, navigation]);
 
   return (
     <View style={styles.container}>
@@ -35,7 +49,7 @@ const Boot: DefaultNavigationProps<Params, ScreenProps> = ({ navigation }) => {
         <Image
           fadeDuration={0}
           source={require('../assets/logo/ic_launcher.png')}
-          onLoadEnd={handleLoadEnd}
+          onLoadEnd={handleImageLoadEnd}
         />
       </SharedElement>
     </View>

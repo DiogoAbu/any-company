@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
+import { List, Switch, useTheme } from 'react-native-paper';
+import { useObserver } from 'mobx-react-lite';
+
+import useStores from '!/hooks/use-stores';
 import { DefaultNavigationProps } from '!/types';
 
 type Params = {};
@@ -8,16 +12,37 @@ type Params = {};
 type ScreenProps = {};
 
 const Account: DefaultNavigationProps<Params, ScreenProps> = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Account</Text>
-    </View>
-  );
+  const { general } = useStores();
+  const { colors, dark } = useTheme();
+
+  return useObserver(() => (
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: colors.background },
+      ]}
+    >
+      <List.Section>
+        <List.Subheader>General</List.Subheader>
+        <List.Item
+          right={() => (
+            <Switch
+              value={dark}
+              onValueChange={() => {
+                general.toggleTheme();
+              }}
+            />
+          )}
+          title='Use dark theme'
+        />
+      </List.Section>
+    </ScrollView>
+  ));
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
   },
 });
 

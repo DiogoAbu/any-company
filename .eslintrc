@@ -25,6 +25,7 @@
     "@typescript-eslint/await-thenable": 2,
     "@typescript-eslint/brace-style": [2, "1tbs"],
     "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-unused-vars": [
       2,
       {
@@ -59,6 +60,13 @@
       "declaration",
       {
         "allowArrowFunctions": true
+      }
+    ],
+    "generator-star-spacing": [
+      2,
+      {
+        "after": false,
+        "before": false
       }
     ],
     "import/first": 2,
@@ -114,6 +122,12 @@
       2,
       {
         "max": 4
+      }
+    ],
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowArrowFunctions": true
       }
     ],
     "react/jsx-no-literals": 0,
